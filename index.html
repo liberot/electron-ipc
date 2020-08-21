@@ -16,13 +16,15 @@ electron-ipc
 
 <script type='text/javascript'>
 
-const {ipcRenderer} = require('electron')
+const {ipcRenderer} = require('electron');
 
 var msg = {
 	'cmd': 'cmd',
 	'abc': '123',
 	'def': '234'
-}
+};
+
+// console.log(ipcRenderer.sendSync('synchronous-message', msg));
 
 ipcRenderer.on('asynchronous-reply', (event, arg) => {
 	console.log(arg);
@@ -30,7 +32,6 @@ ipcRenderer.on('asynchronous-reply', (event, arg) => {
 ipcRenderer.send('asynchronous-message', msg);
 
 
-console.log(ipcRenderer.sendSync('synchronous-message', msg));
 
 </script>
 

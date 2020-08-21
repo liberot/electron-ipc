@@ -7,7 +7,9 @@
   "license": "GPL-3.0",
   "private": true,
   "dependencies": {
-    "electron": "9.0.4",
     "node": "^14.4.0"
+  },
+  "devDependencies": {
+    "electron": "9.0.4"
   }
 }
