@@ -33,8 +33,9 @@ const initMenu = function() {
 	Menu.setApplicationMenu(Menu.buildFromTemplate(template));
 }
 
-let view;
 const initView = function() {
+
+	let view;
 	
 	view = new BrowserWindow({
 		width: 930,
@@ -43,6 +44,8 @@ const initView = function() {
 			nodeIntegration: true
 		}
 	});
+
+	view.setMenu(null);
 
 	view.loadURL(
 		url.format ({
@@ -54,13 +57,9 @@ const initView = function() {
 	
 	view.webContents.openDevTools();
 	view.on('closed', () => { view = null; });
-}
 
-/*
-app.on('browser-window-created', function(e, view) {
-	view.setMenu(null);
-});
-*/
+
+}
 
 ipcMain.on('asynchronous-message', (e, msg)=>{
 	console.log(msg);
@@ -83,11 +82,5 @@ app.on('window-all-closed', function() {
 	}
 });
 
-app.on('activate', function() {
-	if (view === null) {
-		initView();
-	}
-});
-
 app.on('ready', initView);
-app.on('ready', initMenu);
+// app.on('ready', initMenu);
