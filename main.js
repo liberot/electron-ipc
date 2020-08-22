@@ -6,22 +6,7 @@ const app = electron.app;
 const url = require('url')
 const path = require('path')
 
-ipcMain.on('asynchronous-message', (e, msg)=>{
-	console.log(msg);
-	e.sender.send('asynchronous-reply', msg);
-});
-
-ipcMain.on('synchronous-message', (e, msg)=>{
-	console.log(msg);
-	e.returnValue = msg;
-});
-
-ipcMain.handle('some-event-name', (e, msg)=>{
-	console.log(msg);
-	return msg;
-});
-
-function initMenu() {
+const initMenu = function() {
 
 	const template = [{ 
 		role: 'help', label: 'Help',
@@ -49,7 +34,7 @@ function initMenu() {
 }
 
 let view;
-function initView() {
+const initView = function() {
 	
 	view = new BrowserWindow({
 		width: 930,
@@ -68,12 +53,28 @@ function initView() {
 	);
 	
 	view.webContents.openDevTools();
-	
 	view.on('closed', () => { view = null; });
 }
 
-app.on('browser-window-created', function(e, window) {
-	window.setMenu(null);
+/*
+app.on('browser-window-created', function(e, view) {
+	view.setMenu(null);
+});
+*/
+
+ipcMain.on('asynchronous-message', (e, msg)=>{
+	console.log(msg);
+	e.sender.send('asynchronous-reply', msg);
+});
+
+ipcMain.on('synchronous-message', (e, msg)=>{
+	console.log(msg);
+	e.returnValue = msg;
+});
+
+ipcMain.handle('some-event-name', (e, msg)=>{
+	console.log(msg);
+	return msg;
 });
 
 app.on('window-all-closed', function() {
@@ -88,6 +89,5 @@ app.on('activate', function() {
 	}
 });
 
-app.on('ready', initMenu);
 app.on('ready', initView);
-
+app.on('ready', initMenu);
