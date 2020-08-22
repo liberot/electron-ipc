@@ -21,10 +21,10 @@ ipcMain.handle('some-event-name', (e, msg)=>{
 	return msg;
 });
 
-var view;
+let view;
 
-function createWindow() {
-	
+function initMenu() {
+
 	const template = [
 	  { 
 	    role: 'help', label: 'Help',
@@ -54,7 +54,10 @@ function createWindow() {
 
 	const menu = Menu.buildFromTemplate(template)
 	Menu.setApplicationMenu(menu)
+}
 
+function createWindow() {
+	
 	view = new BrowserWindow({
 		width: 930,
 		height: 480,
@@ -92,5 +95,6 @@ app.on('activate', function() {
 	}
 });
 
+app.on('ready', initMenu);
 app.on('ready', createWindow);
 
