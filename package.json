@@ -5,7 +5,6 @@
   "main": "main.js",
   "authors": [],
   "license": "GPL-3.0",
-  "private": true,
   "dependencies": {
     "node": "^14.4.0"
   },
