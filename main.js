@@ -21,41 +21,34 @@ ipcMain.handle('some-event-name', (e, msg)=>{
 	return msg;
 });
 
-let view;
-
 function initMenu() {
 
-	const template = [
-	  { 
-	    role: 'help', label: 'Help',
-	    submenu: [
-	      { label: 'Stolen from',
-	        click () { 
-	          require('electron').shell.openExternal('https://github.com/crilleengvall/electron-tutorial-app')
-	        }
-	      }
-	    ]
-	  }
-	]
+	const template = [{ 
+		role: 'help', label: 'Help',
+		submenu: [{ 
+			label: 'Stolen from',
+	        click () {
+	        	require('electron').shell.openExternal('https://github.com/crilleengvall/electron-tutorial-app')
+	      	}
+	    }]
+	}]
 
-	if (process.platform === 'darwin') {
-	  const name = app.getName()
-	  template.unshift(
-	    {
-	      label: name,
-	      submenu: [
-	        { role: 'about', label: 'About' +' ' +app.getName() },
-	        { type: 'separator' },
-	        { role: 'quit', label: 'Quit' +' ' +app.getName() }
-	      ]
-	    }
-	  )
+	if ('darwin' === process.platform) {
+		const title = app.getName()
+		template.unshift({
+			label: title,
+			submenu: [
+				{ role: 'about', label: 'About: ' +title },
+				{ type: 'separator' },
+				{ role: 'quit', label: 'Quit: ' +title }
+			]
+		})
 	}
 
-	const menu = Menu.buildFromTemplate(template)
-	Menu.setApplicationMenu(menu)
+	Menu.setApplicationMenu(Menu.buildFromTemplate(template));
 }
 
+let view;
 function initView() {
 	
 	view = new BrowserWindow({

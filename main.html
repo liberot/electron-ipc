@@ -11,21 +11,25 @@ electron-ipc
 
 <script type='text/javascript'>
 
+let msg = {};
 const {ipcRenderer} = require('electron');
 
 // https://www.electronjs.org/docs/api/ipc-renderer
 ipcRenderer.on('asynchronous-reply', (e, msg)=>{
 	console.log(msg);
 });
-ipcRenderer.send('asynchronous-message', {'cmd': 'asynchronous-message', 'abc': '1234'});
+msg = {'cmd': 'asynchronous-message', 'abc': '1234'};
+ipcRenderer.send('asynchronous-message', msg);
 
 // https://www.electronjs.org/docs/api/ipc-renderer
-ipcRenderer.invoke('some-event-name', {'cmd': 'some-event-name', 'bcd': '2345'} ).then((res)=>{ 
+msg = {'cmd': 'some-event-name', 'bcd': '2345'};
+ipcRenderer.invoke('some-event-name', msg).then((res)=>{ 
 	console.log(res);
 });
 
 // https://www.electronjs.org/docs/api/ipc-renderer
-console.log(ipcRenderer.sendSync('synchronous-message', {'cmd': 'synchronous-message', 'def': '5496'}));
+msg = {'cmd': 'synchronous-message', 'def': '5496'};
+console.log(ipcRenderer.sendSync('synchronous-message', msg));
 
 
 </script>
