@@ -3,7 +3,6 @@
   "description": "Electron Browser IPC",
   "version": "0.0.0",
   "main": "main.js",
-  "authors": [],
   "license": "GPL-3.0",
   "dependencies": {
     "node": "^14.4.0"
