@@ -56,7 +56,7 @@ function initMenu() {
 	Menu.setApplicationMenu(menu)
 }
 
-function createWindow() {
+function initView() {
 	
 	view = new BrowserWindow({
 		width: 930,
@@ -91,10 +91,10 @@ app.on('window-all-closed', function() {
 
 app.on('activate', function() {
 	if (view === null) {
-		createWindow();
+		initView();
 	}
 });
 
 app.on('ready', initMenu);
-app.on('ready', createWindow);
+app.on('ready', initView);
 
